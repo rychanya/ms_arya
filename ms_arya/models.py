@@ -1,8 +1,8 @@
 from enum import Enum
-from typing import List, Union
+from typing import Dict, List, Union
 
 from bson import ObjectId
-from pydantic import BaseModel, Field, conlist, constr
+from pydantic import BaseModel, Field, conlist, constr, validator
 
 
 class StrObjectId(ObjectId):
@@ -24,26 +24,46 @@ class StrObjectId(ObjectId):
             raise TypeError("str or ObjectId required")
 
 
-class type_enum(str, Enum):
-    one = "Выберите один правильный вариант"
-    many = "Выберите все правильные варианты"
-    drag = "Перетащите варианты так, чтобы они оказались в правильном порядке"
-    join = "Соедините соответствия справа с правильными вариантами"
+class ManyAnswer(BaseModel):
+    __root__: List[constr(min_length=1)]
+
+    def __iter__(self):
+        return iter(self.__root__)
+
+    def __getitem__(self, item):
+        return self.__root__[item]
 
 
-not_empty_str = constr(min_length=1)
-list_with_min_two_items = conlist(not_empty_str, min_items=2)
+class JoinAnswer(BaseModel):
+    __root__: Dict[constr(min_length=1), constr(min_length=1)]
+
+    def __iter__(self):
+        return iter(self.__root__)
+
+    def __getitem__(self, item):
+        return self.__root__[item]
 
 
 class QA(BaseModel):
-    id: StrObjectId = Field(None, alias="_id")
-    type: type_enum
-    question: not_empty_str
-    answers: list_with_min_two_items
-    correct: Union[None, not_empty_str, list_with_min_two_items]
-    incorrect: List[Union[not_empty_str, list_with_min_two_items]] = []
+    class type_enum(str, Enum):
+        one = "Выберите один правильный вариант"
+        many = "Выберите все правильные варианты"
+        drag = "Перетащите варианты так, чтобы они оказались в правильном порядке"
+        join = "Соедините соответствия справа с правильными вариантами"
 
     class Config:
         use_enum_values = True
         allow_population_by_field_name = True
         json_encoders = {ObjectId: lambda v: str(v)}
+
+    id: StrObjectId = Field(None, alias="_id")
+    type: type_enum
+    question: str
+    answers: conlist(constr(min_length=1), min_items=2)
+    correct: Union[None, str, ManyAnswer, JoinAnswer]
+    incorrect: List[Union[str, ManyAnswer], JoinAnswer] = []
+
+    @validator("question")
+    def question_not_empty(cls, v):
+        assert v
+        return v

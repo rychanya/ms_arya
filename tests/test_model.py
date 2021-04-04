@@ -1,12 +1,12 @@
 import pytest
 from pydantic import ValidationError
 
-from ms_arya.models import QA, type_enum
+from ms_arya.models import QA
 
 
 @pytest.fixture
 def qa_dict():
-    return {"type": type_enum.one, "question": "q", "answers": ["1", "2"]}
+    return {"type": QA.type_enum.one, "question": "q", "answers": ["1", "2"]}
 
 
 @pytest.mark.parametrize("value", ["", None])
@@ -32,7 +32,7 @@ def test_incorect_type(qa_dict):
 def test_normal_parse_obj(qa_dict):
     qa = QA.parse_obj(qa_dict)
     assert qa.question == qa_dict["question"]
-    assert qa.answers == qa_dict["answers"]
+    assert list(qa.answers) == qa_dict["answers"]
     assert qa.incorrect == []
     assert qa.id is None
     assert qa.correct is None

@@ -23,4 +23,3 @@ def get_collection() -> Optional[Collection]:
 
 
 client = MongoClient(URI)
-get_collection()
