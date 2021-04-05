@@ -61,7 +61,7 @@ class QA(BaseModel):
     question: str
     answers: conlist(constr(min_length=1), min_items=2)
     correct: Union[None, str, ManyAnswer, JoinAnswer]
-    incorrect: List[Union[str, ManyAnswer], JoinAnswer] = []
+    incorrect: List[Union[str, ManyAnswer, JoinAnswer]] = []
 
     @validator("question")
     def question_not_empty(cls, v):
