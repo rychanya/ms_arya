@@ -1,8 +1,9 @@
 from enum import Enum
-from typing import Dict, List, Union
+from typing import Dict, Generic, List, Optional, TypeVar
 
 from bson import ObjectId
-from pydantic import BaseModel, Field, conlist, constr, validator
+from pydantic import BaseModel, Field, conlist, constr
+from pydantic.generics import GenericModel
 
 
 class StrObjectId(ObjectId):
@@ -44,7 +45,10 @@ class JoinAnswer(BaseModel):
         return self.__root__[item]
 
 
-class QA(BaseModel):
+QAType = TypeVar("QAType", str, ManyAnswer, JoinAnswer)
+
+
+class QA(GenericModel, Generic[QAType]):
     class type_enum(str, Enum):
         one = "Выберите один правильный вариант"
         many = "Выберите все правильные варианты"
@@ -58,12 +62,8 @@ class QA(BaseModel):
 
     id: StrObjectId = Field(None, alias="_id")
     type: type_enum
-    question: str
+    question: constr(min_length=1)
     answers: conlist(constr(min_length=1), min_items=2)
-    correct: Union[None, str, ManyAnswer, JoinAnswer]
-    incorrect: List[Union[str, ManyAnswer, JoinAnswer]] = []
-
-    @validator("question")
-    def question_not_empty(cls, v):
-        assert v
-        return v
+    extra_answers: Optional[conlist(constr(min_length=1), min_items=2)]
+    correct: Optional[QAType]
+    incorrect: List[QAType] = []
