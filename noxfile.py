@@ -5,6 +5,7 @@ import nox
 def prety(session: nox.Session):
     session.run("black", ".")
     session.run("isort", "--recursive", ".")
+    session.run("flake8", ".")
 
 
 @nox.session(python=False)
