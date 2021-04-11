@@ -2,7 +2,6 @@ import pytest
 from pydantic import ValidationError
 
 from ms_arya.models import QA
-from tests.conftest import qa_dict
 
 
 @pytest.mark.parametrize("value", ["", None])
