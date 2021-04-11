@@ -12,6 +12,7 @@ dnspython = "^2.1.0"
 python-dotenv = "^0.16.0"
 loguru = "^0.5.3"
 pytest-mock = "^3.5.1"
+transitions = "^0.8.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
