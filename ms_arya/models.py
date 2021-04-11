@@ -25,6 +25,10 @@ class StrObjectId(ObjectId):
             raise TypeError("str or ObjectId required")
 
 
+class OneAnswer(BaseModel):
+    __root__: constr(min_length=1)
+
+
 class ManyAnswer(BaseModel):
     __root__: List[constr(min_length=1)]
 
@@ -45,10 +49,10 @@ class JoinAnswer(BaseModel):
         return self.__root__[item]
 
 
-QAType = TypeVar("QAType", str, ManyAnswer, JoinAnswer)
+AnswerType = TypeVar("AnswerType", OneAnswer, ManyAnswer, JoinAnswer)
 
 
-class QA(GenericModel, Generic[QAType]):
+class QA(GenericModel, Generic[AnswerType]):
     class type_enum(str, Enum):
         one = "Выберите один правильный вариант"
         many = "Выберите все правильные варианты"
@@ -59,11 +63,12 @@ class QA(GenericModel, Generic[QAType]):
         use_enum_values = True
         allow_population_by_field_name = True
         json_encoders = {ObjectId: lambda v: str(v)}
+        allow_mutation = False
 
     id: StrObjectId = Field(None, alias="_id")
     type: type_enum
     question: constr(min_length=1)
     answers: conlist(constr(min_length=1), min_items=2)
     extra_answers: Optional[conlist(constr(min_length=1), min_items=2)]
-    correct: Optional[QAType]
-    incorrect: List[QAType] = []
+    correct: Optional[AnswerType]
+    incorrect: List[AnswerType] = []
