@@ -2,11 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from ms_arya.models import QA
-
-
-@pytest.fixture
-def qa_dict():
-    return {"type": QA.type_enum.one, "question": "q", "answers": ["1", "2"]}
+from tests.conftest import qa_dict
 
 
 @pytest.mark.parametrize("value", ["", None])
