@@ -13,7 +13,7 @@ python-dotenv = "^0.17.0"
 loguru = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^6.2"
 nox = "^2020.12.31"
 
 [build-system]
