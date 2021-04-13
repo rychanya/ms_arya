@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict, Generic, List, Optional, TypeVar
+from typing import Any, Dict, Generic, List, Optional, Type, TypeVar
 
 from bson import ObjectId
 from pydantic import BaseModel, Field, conlist, constr
@@ -50,6 +50,7 @@ class JoinAnswer(BaseModel):
 
 
 AnswerType = TypeVar("AnswerType", OneAnswer, ManyAnswer, JoinAnswer)
+Model = TypeVar("Model", bound="BaseModel")
 
 
 class QA(GenericModel, Generic[AnswerType]):
@@ -71,4 +72,19 @@ class QA(GenericModel, Generic[AnswerType]):
     answers: conlist(constr(min_length=1), min_items=2)
     extra_answers: Optional[conlist(constr(min_length=1), min_items=2)]
     correct: Optional[AnswerType]
-    incorrect: List[AnswerType] = []
+    incorrect: List[AnswerType] = None
+
+    @classmethod
+    def parse_obj(cls: Type["Model"], obj: Any) -> "Model":
+        if obj["type"] == cls.type_enum.one:
+            return cls[str]._parse_obj(obj)
+        if (obj["type"] == cls.type_enum.many) or (obj["type"] == cls.type_enum.drag):
+            return cls[list]._parse_obj(obj)
+        if obj["type"] == cls.type_enum.join:
+            return cls[dict]._parse_obj(obj)
+        else:
+            return cls._parse_obj(obj)
+
+    @classmethod
+    def _parse_obj(cls: Type["Model"], obj: Any) -> "Model":
+        return super().parse_obj(obj)
