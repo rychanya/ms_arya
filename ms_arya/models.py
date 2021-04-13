@@ -72,7 +72,8 @@ class QA(GenericModel, Generic[AnswerType]):
     answers: conlist(constr(min_length=1), min_items=2)
     extra_answers: Optional[conlist(constr(min_length=1), min_items=2)]
     correct: Optional[AnswerType]
-    incorrect: List[AnswerType] = None
+    incorrect: Optional[List[AnswerType]]
+    tags: Optional[Dict[str, str]]
 
     @classmethod
     def parse_obj(cls: Type["Model"], obj: Any) -> "Model":

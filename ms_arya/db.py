@@ -21,7 +21,7 @@ def find_or_create(qa: QA) -> QA:
         "type": qa.type,
         "answers": {"$all": [{"$elemMatch": {"$eq": answer}} for answer in qa.answers]},
     }
-    update = {"$setOnInsert": {"answers": qa.answers}}
+    update = {"$setOnInsert": {"answers": qa.answers, "tags": qa.tags}}
     if qa.type == QA.type_enum.join:
         filter.update(
             {
