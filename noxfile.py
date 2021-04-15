@@ -21,6 +21,15 @@ def tests(session: nox.Session):
 
 
 @nox.session(python=False)
+def coverage(session: nox.Session):
+    session.run("poetry", "shell")
+    session.run("poetry", "install")
+    session.run("coverage", "run", "--source=ms_arya", "-m", "pytest")
+    session.run("coverage", "report")
+    session.run("coverage", "html")
+
+
+@nox.session(python=False)
 def docs(session: nox.Session):
     session.run("poetry", "shell")
     session.chdir("docs")
