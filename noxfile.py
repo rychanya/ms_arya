@@ -35,3 +35,10 @@ def docs(session: nox.Session):
     session.chdir("docs")
     shutil.rmtree("_build", ignore_errors=True)
     session.run("sphinx-build", "-b", "html", "-W", ".", "_build/html")
+
+
+@nox.session(python=False)
+def req(session: nox.Session):
+    session.run(
+        "poetry", "export", "-f", "requirements.txt", "--output", "requirements.txt", "--without-hashes"
+    )
