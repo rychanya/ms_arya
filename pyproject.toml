@@ -16,7 +16,7 @@ transitions = "^0.8.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
-nox = "^2020.12.31"
+nox = "^2021.6.6"
 Sphinx = "^3.5.4"
 coverage = "^5.5"
 black = "^21.5b0"
