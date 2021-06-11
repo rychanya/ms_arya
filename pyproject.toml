@@ -19,7 +19,7 @@ pytest = "^6.2"
 nox = "^2020.12.31"
 Sphinx = "^3.5.4"
 coverage = "^5.5"
-black = "^21.5b0"
+black = "^21.6b0"
 isort = "^5.8.0"
 flake8 = "^3.9.1"
 
