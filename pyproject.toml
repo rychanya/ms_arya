@@ -20,7 +20,7 @@ nox = "^2020.12.31"
 Sphinx = "^3.5.4"
 coverage = "^5.5"
 black = "^21.5b0"
-isort = "^5.8.0"
+isort = "^5.9.1"
 flake8 = "^3.9.1"
 
 [build-system]
