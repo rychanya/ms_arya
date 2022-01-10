@@ -279,7 +279,7 @@ python-versions = "*"
 
 [[package]]
 name = "nox"
-version = "2021.6.12"
+version = "2022.1.7"
 description = "Flexible test automation."
 category = "dev"
 optional = false
@@ -680,7 +680,7 @@ dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "20edb2f188022b510bf0b76851744a087783cfd0e46b10e35166645480ed120a"
+content-hash = "b1324732e52e2d48c2faa9c30fa232db852691c0684b3a1bc7714eef6ccadb44"
 
 [metadata.files]
 alabaster = [
@@ -892,8 +892,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 nox = [
-    {file = "nox-2021.6.12-py3-none-any.whl", hash = "sha256:1e90df301f6622efb1c29d1586e5a5755846b1eb99b2764230304f8fa31d1734"},
-    {file = "nox-2021.6.12.tar.gz", hash = "sha256:955dbeb8e657a08226f8c1c8f8d1e2a40fe5438a792056314f351e504639a80f"},
+    {file = "nox-2022.1.7-py3-none-any.whl", hash = "sha256:efee12f02d39405b16d68f60e7a06fe1fc450ae58669d6cdda8c7f48e3bae9e3"},
+    {file = "nox-2022.1.7.tar.gz", hash = "sha256:b375238cebb0b9df2fab74b8d0ce1a50cd80df60ca2e13f38f539454fcd97d7e"},
 ]
 packaging = [
     {file = "packaging-20.9-py2.py3-none-any.whl", hash = "sha256:67714da7f7bc052e064859c05c595155bd1ee9f69f76557e21f051443c20947a"},
