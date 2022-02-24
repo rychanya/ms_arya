@@ -614,7 +614,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "transitions"
-version = "0.8.8"
+version = "0.8.11"
 description = "A lightweight, object-oriented Python state machine implementation with many extensions."
 category = "main"
 optional = false
@@ -680,7 +680,7 @@ dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "20edb2f188022b510bf0b76851744a087783cfd0e46b10e35166645480ed120a"
+content-hash = "45a285623bcc850606f8e5d0ba21210b9fbcdc380ab9acccc932dd8f3d0ee7cd"
 
 [metadata.files]
 alabaster = [
@@ -1159,8 +1159,8 @@ tomli = [
     {file = "tomli-1.0.4.tar.gz", hash = "sha256:be670d0d8d7570fd0ea0113bd7bb1ba3ac6706b4de062cc4c952769355c9c268"},
 ]
 transitions = [
-    {file = "transitions-0.8.8-py2.py3-none-any.whl", hash = "sha256:f35efa070fbdf9a0f3f093b19f1258068786af75786a8cbcc884444f3d1a66d4"},
-    {file = "transitions-0.8.8.tar.gz", hash = "sha256:e7a86b31a161a76133f189b3ae9dad2755a80ea4c1e0eee1805648d021fb677d"},
+    {file = "transitions-0.8.11-py2.py3-none-any.whl", hash = "sha256:9525dd9b708b0a54bb4562a06a483d237e75c94547ba9831c81c6872d0ea1522"},
+    {file = "transitions-0.8.11.tar.gz", hash = "sha256:7b20d32906ea4d60ee6f6c1f5dc9c9f178802425c5b155213eb0f25c277f04e4"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.7.4.3-py2-none-any.whl", hash = "sha256:dafc7639cde7f1b6e1acc0f457842a83e722ccca8eef5270af2d74792619a89f"},
